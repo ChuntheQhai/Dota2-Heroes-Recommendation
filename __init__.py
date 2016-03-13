@@ -1,4 +1,4 @@
-from flask import Flask, session, render_template,request
+from flask import Flask, render_template,request
 from RandomForest.random_forest import RandomForest
 from engine import Engine
 import json
@@ -10,8 +10,10 @@ engine = Engine(RandomForest())
 
 #URL_PREFIX = 'http://127.0.0.1:5000'
 
+SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+json_path = os.path.join(SITE_ROOT,"heroes.json")
 
-with open('heroes.json', 'r') as fp:
+with open(json_path, 'r') as fp:
 	heroesData = json.load(fp)
 
 def get_api_string(recommendations, prob):
