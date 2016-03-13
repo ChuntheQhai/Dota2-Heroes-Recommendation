@@ -25,7 +25,8 @@ def get_api_string(recommendations, prob):
 
 @app.route("/")
 def index():
-	return render_template('index.html', heroes=heroesData)
+	return render_template('starter.html')
+	#return render_template('index.html', heroes=heroesData)
 
 @app.route("/api/recommend/")
 def api():
