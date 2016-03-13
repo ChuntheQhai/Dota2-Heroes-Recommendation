@@ -1,7 +1,9 @@
 from RandomForest.random_forest import RandomForest
 import os, json
 
-with open('heroes.json', 'r') as fp:
+SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+json_url = os.path.join(SITE_ROOT, "heroes.json")
+with open(json_url, 'r') as fp:
 	heroes = json.load(fp)
 	hero_ids = [hero['id'] for hero in heroes]
 

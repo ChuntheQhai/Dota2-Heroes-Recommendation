@@ -6,7 +6,8 @@ NUM_FEATURES = NUM_HEROES * 2
 
 class RandomForest:
 	def __init__(self, model_root='RandomForest'):
-		model_path = os.path.join(model_root, 'model.pkl')
+		SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+		model_path = os.path.join(SITE_ROOT, 'model.pkl')
 		with open(model_path, 'r') as input_file:
 			self.model = pickle.load(input_file)
 
