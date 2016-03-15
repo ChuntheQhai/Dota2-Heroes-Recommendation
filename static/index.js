@@ -96,7 +96,7 @@ jQuery(document).ready(function($){
         if(ourTeams.team.contains(heroId) || theirTeams.team.contains(heroId)){
             alert("Hero is selected. Please choose another.");
         }else{
-            src = "/static/images/hero_"+heroId+".png";
+            src = "https://s3-ap-southeast-1.amazonaws.com/bucketrandom/dota2/hero_"+heroId+".png";
             var targetSlot = document.getElementById('targetslot').value;
 
             $(targetSlot).attr('src',src);
@@ -128,7 +128,7 @@ jQuery(document).ready(function($){
         if(ourTeams.team.contains(heroId) || theirTeams.team.contains(heroId)){
             alert("Hero is selected. Please choose another.");
         }else{
-            src = "/static/images/hero_"+heroId+".png";
+            src = "https://s3-ap-southeast-1.amazonaws.com/bucketrandom/dota2/hero_"+heroId+".png";
 
             var done =false;
             var targetSlot;
@@ -165,7 +165,7 @@ function insertRecommendHero(id,name){
     var filas = document.getElementById("recommendation_table").rows.length;
     var x = document.getElementById("recommendation_table").insertRow(filas);
     var y = x.insertCell(0);
-    y.innerHTML = "<a href='javascript:;' class='select_recommend_hero' id="+id+"><img src='static/images/hero_"+id+".png'/><span>"+name+"</span></a>";   
+    y.innerHTML = "<a href='javascript:;' class='select_recommend_hero' id="+id+"><img src='https://s3-ap-southeast-1.amazonaws.com/bucketrandom/dota2/hero_"+id+".png'/><span>"+name+"</span></a>";   
 }
 
 

@@ -1,10 +1,10 @@
 from flask import Flask, render_template,request
 from RandomForest.random_forest import RandomForest
 from engine import Engine
-import json
+import json, os
 
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 engine = Engine(RandomForest())
 
@@ -25,12 +25,12 @@ def get_api_string(recommendations, prob):
 	            
 	return json.dumps({'x':hero_objects,'prob_x': prob})
 
-@app.route("/")
+@application.route("/")
 def index():
-	return render_template('starter.html')
-	#return render_template('index.html', heroes=heroesData)
+	#return render_template('starter.html')
+	return render_template('index.html', heroes=heroesData)
 
-@app.route("/api/recommend/")
+@application.route("/api/recommend/")
 def api():
 	if 'x' not in request.args or 'y' not in request.args:
 		return 'Invalid request'
@@ -58,5 +58,5 @@ def api():
 	return get_api_string(recommendations, prob)
 
 if __name__ == "__main__":
-	app.debug = True
-	app.run('0.0.0.0')
+	application.debug = True
+	application.run(host='0.0.0.0')
