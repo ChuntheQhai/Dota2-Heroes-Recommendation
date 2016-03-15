@@ -1,7 +1,12 @@
 from flask import Flask, render_template,request
 from RandomForest.random_forest import RandomForest
 from engine import Engine
-import json, os
+import json, os, time
+from pymongo import MongoClient
+
+client = MongoClient(os.getenv('DOTABOT_DB_SERVER', 'localhost'), 27017)
+db = client[os.getenv('DOTABOT_DB_NAME', 'dota2')]
+match_collection = db.matches
 
 
 application = Flask(__name__)
@@ -29,6 +34,20 @@ def get_api_string(recommendations, prob):
 def index():
 	#return render_template('starter.html')
 	return render_template('index.html', heroes=heroesData)
+
+@application.route("/stats")
+def stats():
+	most_recent_match_id = 0
+	for post in match_collection.find({}).sort('_id', direction=-1).limit(1):
+		most_recent_match_id = post['match_id']
+		most_recent_match_time = post['start_time']
+
+	total_matches = match_collection.count()
+	human_readable_time = time.strftime("%a, %d %b %Y %H:%M:%S GMT", time.localtime(most_recent_match_time))
+
+	disk_stats = os.statvfs('/')
+	mb_remaining = disk_stats.f_bavail * disk_stats.f_frsize/1024.0/1024.0/1024.0
+	return render_template('stats.html',total_matches=total_matches, most_recent_match_id=most_recent_match_id, human_readable_time=human_readable_time, mb_remaining=mb_remaining)
 
 @application.route("/api/recommend/")
 def api():
