@@ -1,4 +1,4 @@
-#!/var/www/FlaskApp/dota2-ml/venv/bin/python
+#!/home/dota2ml/dota2ml/venv/bin/python
 
 # -*- coding: utf-8 -*-
 import re

@@ -3,10 +3,19 @@ from RandomForest.random_forest import RandomForest
 from engine import Engine
 import json, os, time
 from pymongo import MongoClient
+import logging
 
-client = MongoClient(os.getenv('DOTABOT_DB_SERVER', 'localhost'), 27017)
-db = client[os.getenv('DOTABOT_DB_NAME', 'dota2')]
+#client = MongoClient(os.getenv('DOTABOT_DB_SERVER', 'localhost'), 27017)
+#db = client[os.getenv('DOTABOT_DB_NAME', 'dota2')]
+client = MongoClient("127.0.0.1", 27017)
+db = client["dota2"]
 match_collection = db.matches
+
+logger = logging.getLogger(__name__)
+#logger.log(match_collection)
+#logger.log(db)
+#logger.log(client)
+#logger.log(os.getenv('DOTABOT_DB_SERVER','localhost'))
 
 
 application = Flask(__name__)
